@@ -11,7 +11,6 @@ const upload = require("./multer");
 
 const app = express();
 
-const cors = require("cors");
 
 app.use(
   cors({origin: [
