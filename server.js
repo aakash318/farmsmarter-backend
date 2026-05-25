@@ -38,7 +38,7 @@ password,
 phoneNumber,
 farmLocation
 }=req.body;
-const sql="INSERT INTO registerFarmer(name,email,password,phoneNumber,farmLocation) values(?,?,?,?,?)";
+const sql="INSERT INTO registerfarmer(name,email,password,phoneNumber,farmLocation) values(?,?,?,?,?)";
 db.query(sql,[name,email,password,phoneNumber,farmLocation],(err,result)=>{
   if(err){
     console.log(err,"farmers not registered")
