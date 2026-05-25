@@ -11,7 +11,17 @@ const upload = require("./multer");
 
 const app = express();
 
-app.use(cors());
+const cors = require("cors");
+
+app.use(
+  cors({origin: [
+      "https://truckimex.shop",
+      "https://www.truckimex.shop",
+      "http://localhost:5173"
+    ],
+    credentials: true
+  })
+);
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 const paymentRoute=require('./paymentRoute');
