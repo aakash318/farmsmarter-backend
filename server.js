@@ -54,7 +54,7 @@ app.post("/login",(req,res)=>{
 const {email,password}=req.body;
 
 const sql=
-"SELECT * FROM registerFarmer WHERE email=? AND password=?";
+"SELECT * FROM registerfarmer WHERE email=? AND password=?";
 
 db.query(sql,[email,password],(err,result)=>{
 
