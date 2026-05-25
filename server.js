@@ -13,14 +13,17 @@ const app = express();
 
 
 app.use(
-  cors({origin: [
+  cors({
+    origin: [
       "https://truckimex.shop",
       "https://www.truckimex.shop",
       "http://localhost:5173"
     ],
+    methods: ["GET","POST","PUT","DELETE"],
     credentials: true
   })
 );
+
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 const paymentRoute=require('./paymentRoute');
