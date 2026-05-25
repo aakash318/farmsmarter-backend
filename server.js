@@ -50,29 +50,47 @@ db.query(sql,[name,email,password,phoneNumber,farmLocation],(err,result)=>{
 })
 })
 app.post("/login",(req,res)=>{
-  const{email,password}=req.body;
 
-  const sql="SELECT * FROM registerFarmer WHERE email=? and password=?"
-  db.query(sql,[email,password],(err,result)=>{
-    if(err){
-      res.status(500).json({
-        msg:"login failed"
+const {email,password}=req.body;
 
-      })}
-      if(result.length>0){
-       return  res.json({success:true,
-          msg:"login successfilly",
-          user:result[0]
-          })
-      }
-      return res.status(401).json({
-        success:"false",
-        msg:"mismatch"
-      })
-    
-  })
+const sql=
+"SELECT * FROM registerFarmer WHERE email=? AND password=?";
 
-})
+db.query(sql,[email,password],(err,result)=>{
+
+if(err){
+
+console.log(err);
+
+return res.status(500).json({
+success:false,
+msg:"login failed"
+});
+
+}
+
+if(result.length>0){
+
+return res.json({
+
+success:true,
+msg:"login successful",
+user:result[0]
+
+});
+
+}
+
+return res.status(401).json({
+
+success:false,
+msg:"Email or password mismatch"
+
+});
+
+});
+
+});
 app.post(
 "/addProduct",
 upload.single("image"),
