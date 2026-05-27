@@ -38,16 +38,29 @@ password,
 phoneNumber,
 farmLocation
 }=req.body;
-const sql="INSERT INTO registerfarmer(name,email,password,phoneNumber,farmLocation) values(?,?,?,?,?)";
+db.query("SELECT email FROM registerFarmer WHERE email=?",[email],(err,result)=>{
+  if(err){
+    return res.json({msg:"error",error:err});
+    
+  }
+  if(result.length>0){
+    return res.json({msg:"you are already register"});
+  }
+  if(result.length==0){
+    const sql="INSERT INTO registerFarmer(name,email,password,phoneNumber,farmLocation) values(?,?,?,?,?)";
 db.query(sql,[name,email,password,phoneNumber,farmLocation],(err,result)=>{
   if(err){
     console.log(err,"farmers not registered")
+    return res.json({msg:"farmer not registered"})
   }
   if(result){
 
    res.send("data inserted succesfully")
   }
 })
+  }
+})
+
 })
 app.post("/login",(req,res)=>{
 
